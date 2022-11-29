@@ -1,19 +1,26 @@
 <template>
   <article>
-    <v-sheet color="deep-purple darken-3" class="pa-16 mb-6">
-      <v-row>
-        <v-col cols="12" sm="6" offset-sm="3">
-          <h1 class="text-h2 text-center">Rick and Morty Character Finder</h1>
+    <v-parallax
+      :src="require('~/static/rm-prism.jpg')"
+      height="500"
+      class="pa-16 mb-6"
+    >
+      <v-row align="center">
+        <v-col cols="12" sm="6" offset-sm="3" lg="4" offset-lg="2">
+          <h1 class="text-h2 font-weight-bold text-center">
+            Rick and Morty Character Finder
+          </h1>
         </v-col>
-        <v-col cols="12" class="">
+        <v-col cols="12" lg="4">
           <v-img
+            class="logo"
             contain
             max-height="200"
             :src="require('~/static/icon-144x144.png')"
           ></v-img
         ></v-col>
       </v-row>
-    </v-sheet>
+    </v-parallax>
 
     <v-container fluid class="px-16">
       <v-row justify="center" align="center">
@@ -26,7 +33,13 @@
           lg="3"
           xl="2"
         >
-          <v-card tile class="mx-auto" @click="getCharacter(character.id)">
+          <v-card
+            tile
+            class="mx-auto"
+            color="deep-purple accent-1"
+            light
+            @click="getCharacter(character.id)"
+          >
             <v-img height="300" lazy :src="character.image"></v-img>
             <v-card-title class="headline">{{ character.name }}</v-card-title>
             <v-card-text>
@@ -38,57 +51,39 @@
     </v-container>
 
     <v-footer fixed app>
-      <v-row>
-        <v-col>
-          <!-- {{ paging }} -->
+      <v-container>
+        <v-row>
+          <v-col>
+            <!-- {{ paging }} -->
 
-          <v-btn
-            x-large
-            block
-            color="pink"
-            :disabled="prevDisabled"
-            @click="prevPage()"
-            >Prev</v-btn
-          >
-        </v-col>
+            <v-btn
+              x-large
+              block
+              color="pink accent-3"
+              :disabled="prevDisabled"
+              @click="prevPage()"
+              >Prev</v-btn
+            >
+          </v-col>
 
-        <v-col>
-          <v-btn
-            x-large
-            block
-            color="pink"
-            :disabled="nextDisabled"
-            class=""
-            @click="nextPage()"
-            >Next</v-btn
-          >
-        </v-col>
-      </v-row>
+          <v-col>
+            <v-btn
+              x-large
+              block
+              color="pink accent-3"
+              :disabled="nextDisabled"
+              class=""
+              @click="nextPage()"
+              >Next</v-btn
+            >
+          </v-col>
+        </v-row>
+      </v-container>
     </v-footer>
 
     <!-- Dialog with character details -->
     <v-dialog v-if="character" v-model="dialog" max-width="900px">
-      <v-card>
-        <v-card-title class="headline">{{ character.name }}</v-card-title>
-
-        <v-card-text>
-          <v-row>
-            <v-col cols="12" sm="6" md="4">
-              <v-img :src="character.image" height="200px"></v-img>
-            </v-col>
-            <v-col cols="12" sm="6" md="8">
-              <p><strong>Name:</strong> {{ character.name }}</p>
-              <p><strong>Species:</strong> {{ character.species }}</p>
-              <p><strong>Status:</strong> {{ character.status }}</p>
-              <p><strong>Gender:</strong> {{ character.gender }}</p>
-              <p><strong>Origin:</strong> {{ character.origin.name }}</p>
-              <p><strong>Location:</strong> {{ character.location.name }}</p>
-              <p><strong>Img:</strong> {{ character.image }}</p>
-              <p><strong>Episodes:</strong> {{ character.episode }}</p>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
+      <character-popup :character="character"></character-popup>
     </v-dialog>
   </article>
 </template>
@@ -141,3 +136,19 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.logo {
+  animation: rotate 10s linear infinite;
+}
+
+// rotate animation
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
