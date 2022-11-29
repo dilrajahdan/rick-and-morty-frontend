@@ -1,7 +1,18 @@
 <template>
   <article>
-    <v-sheet color="pink" class="pa-16 mb-6">
-      <h1 class="text-h2 text-center">Rick and Morty</h1>
+    <v-sheet color="deep-purple darken-3" class="pa-16 mb-6">
+      <v-row>
+        <v-col cols="12" sm="6" offset-sm="3">
+          <h1 class="text-h2 text-center">Rick and Morty Character Finder</h1>
+        </v-col>
+        <v-col cols="12" class="">
+          <v-img
+            contain
+            max-height="200"
+            :src="require('~/static/icon-144x144.png')"
+          ></v-img
+        ></v-col>
+      </v-row>
     </v-sheet>
 
     <v-container fluid class="px-16">
@@ -15,8 +26,8 @@
           lg="3"
           xl="2"
         >
-          <v-card class="mx-auto" @click="getCharacter(character.id)">
-            <v-img :src="character.image"></v-img>
+          <v-card tile class="mx-auto" @click="getCharacter(character.id)">
+            <v-img height="300" lazy :src="character.image"></v-img>
             <v-card-title class="headline">{{ character.name }}</v-card-title>
             <v-card-text>
               {{ character.species }}
@@ -24,31 +35,39 @@
           </v-card>
         </v-col>
       </v-row>
+    </v-container>
+
+    <v-footer fixed app>
       <v-row>
-        <v-col class="text-center">
+        <v-col>
           <!-- {{ paging }} -->
 
           <v-btn
             x-large
+            block
             color="pink"
-            :disabled="!paging.prev"
+            :disabled="prevDisabled"
             @click="prevPage()"
             >Prev</v-btn
           >
+        </v-col>
+
+        <v-col>
           <v-btn
             x-large
+            block
             color="pink"
-            :disabled="!paging.next"
-            class="ml-6"
+            :disabled="nextDisabled"
+            class=""
             @click="nextPage()"
             >Next</v-btn
           >
         </v-col>
       </v-row>
-    </v-container>
+    </v-footer>
 
     <!-- Dialog with character details -->
-    <v-dialog v-model="dialog" max-width="900px">
+    <v-dialog v-if="character" v-model="dialog" max-width="900px">
       <v-card>
         <v-card-title class="headline">{{ character.name }}</v-card-title>
 
@@ -58,9 +77,6 @@
               <v-img :src="character.image" height="200px"></v-img>
             </v-col>
             <v-col cols="12" sm="6" md="8">
-              <!-- get name, status, species, gender, origin,
-last known location, image, number of episodes appearances -->
-
               <p><strong>Name:</strong> {{ character.name }}</p>
               <p><strong>Species:</strong> {{ character.species }}</p>
               <p><strong>Status:</strong> {{ character.status }}</p>
@@ -89,12 +105,20 @@ export default {
     return { characters: data.results, paging: data.info }
   },
   data: () => ({
-    character: [],
+    character: null,
     characters: [],
     paging: {},
     dialog: false,
   }),
-  // setup paging
+  // set up computed properties to get the next and previous disabled state
+  computed: {
+    prevDisabled() {
+      return !this.paging.prev
+    },
+    nextDisabled() {
+      return !this.paging.next
+    },
+  },
   methods: {
     async nextPage() {
       const { data } = await this.$axios.get(this.paging.next)
