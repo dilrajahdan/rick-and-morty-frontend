@@ -1,26 +1,39 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col
-      v-for="character in characters"
-      :key="character.id"
-      cols="12"
-      sm="8"
-      md="3"
-    >
-      <v-card class="mx-auto" :to="`/character/${character.id}`">
-        <v-img :src="character.image" height="200px"></v-img>
-        <v-card-title class="headline">{{ character.name }}</v-card-title>
-        <v-card-text>
-          {{ character.species }}
-        </v-card-text>
-      </v-card>
-    </v-col>
+  <article>
+    <v-sheet color="pink" class="pa-16 mb-6">
+      <h1 class="text-h2 text-center">Rick and Morty</h1>
+    </v-sheet>
 
-    <!-- {{ paging }} -->
+    <v-container>
+      <v-row justify="center" align="center">
+        <v-col
+          v-for="character in characters"
+          :key="character.id"
+          cols="12"
+          sm="8"
+          md="3"
+        >
+          <v-card class="mx-auto" :to="`/character/${character.id}`">
+            <!-- <v-parallax :src="character.image" height="200px"> -->
+            <!-- <v-card-title class="headline white--text">{{
+            character.name
+          }}</v-card-title> -->
+            <v-img :src="character.image" height="200px"></v-img>
+            <v-card-title class="headline">{{ character.name }}</v-card-title>
+            <v-card-text>
+              {{ character.species }}
+            </v-card-text>
+            <!-- </v-parallax> -->
+          </v-card>
+        </v-col>
 
-    <v-btn @click="prevPage()">Prev</v-btn>
-    <v-btn @click="nextPage()">Next</v-btn>
-  </v-row>
+        <!-- {{ paging }} -->
+
+        <v-btn @click="prevPage()">Prev</v-btn>
+        <v-btn @click="nextPage()">Next</v-btn>
+      </v-row>
+    </v-container>
+  </article>
 </template>
 
 <script>
