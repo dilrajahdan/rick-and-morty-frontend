@@ -41,9 +41,24 @@
             @click="getCharacter(character.id)"
           >
             <v-img height="300" lazy :src="character.image"></v-img>
-            <v-card-title class="headline">{{ character.name }}</v-card-title>
+            <v-card-title :title="character.name" class="text-h5"
+              ><span class="text-no-wrap text-truncate">{{
+                character.name
+              }}</span></v-card-title
+            >
+
             <v-card-text>
-              {{ character.species }}
+              <v-chip
+                label
+                :color="
+                  character.species === 'Human'
+                    ? 'deep-purple accent-2'
+                    : 'teal accent-3'
+                "
+                :text-color="character.species === 'Human' ? 'white' : ''"
+                class=""
+                >{{ character.species }}</v-chip
+              >
             </v-card-text>
           </v-card>
         </v-col>
@@ -140,6 +155,7 @@ export default {
 <style lang="scss">
 .logo {
   animation: rotate 10s linear infinite;
+  filter: invert(1);
 }
 
 // rotate animation
