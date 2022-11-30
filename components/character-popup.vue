@@ -62,6 +62,7 @@
             <v-select
               label="Watch Featuring Episode"
               :items="character.episode"
+              @change="openLink($event)"
             ></v-select>
           </p>
         </v-col>
@@ -101,6 +102,9 @@ export default {
     },
     close() {
       this.$emit('close')
+    },
+    openLink(url) {
+      window.open(url, '_blank')
     },
   },
 }

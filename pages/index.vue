@@ -15,7 +15,7 @@
           <v-img
             class="site-header__logo"
             contain
-            max-height="288"
+            :max-height="$vuetify.breakpoint.smAndDown ? 144 : 288"
             :src="require('~/static/icon-144x144.png')"
           ></v-img
         ></v-col>
@@ -89,8 +89,6 @@
       <v-container>
         <v-row>
           <v-col>
-            <!-- {{ paging }} -->
-
             <v-btn
               x-large
               block
@@ -162,9 +160,9 @@ export default {
   },
 
   mounted() {
-    console.log('mounted')
-
     const tl = gsap.timeline()
+
+    // this.splitText('.site-header__title')
 
     // init site-header, character-card and footer by setting opacity to 0
     tl.set('.site-header .v-parallax__image-container', { opacity: 0 })
@@ -180,7 +178,7 @@ export default {
       opacity: 0,
       rotation: gsap.utils.wrap([-2, 2]),
     })
-    tl.set('.character-paging', { opacity: 0, y: '100%' })
+    tl.set('.character-paging', { opacity: 0, y: 100 })
     tl.set('.character-paging .v-btn', { opacity: 0, y: '100%' })
 
     // animate intro
@@ -198,6 +196,7 @@ export default {
       duration: 1.1,
       ease: 'elastic.out(1, 0.3)',
     })
+
     tl.to(
       '.site-header .v-parallax__image-container',
       {
@@ -233,36 +232,18 @@ export default {
         duration: 0.2,
         ease: 'power4.outIn',
       },
-      '-=1'
+      '-=3'
     )
-    tl.to('.character-paging .v-btn', {
-      opacity: 1,
-      y: 0,
-      ease: 'power4.outIn',
-      stagger: 0.1,
-    })
-
-    // tl.from('.logo', {
-    //   duration: 1,
-    //   opacity: 0,
-    //   y: -100,
-    //   ease: 'power4.out',
-    // })
-    //   .from('.site-title', {
-    //     duration: 1,
-    //     opacity: 0,
-    //     y: -100,
-    //     ease: 'power4.out',
-    //   })
-    //   .from('.loader', {
-    //     duration: 1,
-    //     opacity: 0,
-    //     y: -100,
-    //     ease: 'power4.out',
-    //   })
-
-    // console.log(this.$vuetify.breakpoint)
-    // console.log(this.$vuetify.breakpoint.smAndDown)
+    tl.to(
+      '.character-paging .v-btn',
+      {
+        opacity: 1,
+        y: 0,
+        ease: 'power4.outIn',
+        stagger: 0.2,
+      },
+      '-=3'
+    )
   },
 
   methods: {
@@ -304,8 +285,8 @@ export default {
     transform: rotate(0) !important;
 
     .v-image__image {
-      transition: background-size 255ms ease-in-out;
-      background-size: 110%;
+      transition: all 555ms ease-in-out;
+      transform: scale(1.1);
     }
   }
 
@@ -319,8 +300,8 @@ export default {
   }
 
   .v-image__image {
-    background-size: 120%;
-    transition: background-size 125ms ease-in-out;
+    transform: scale(1);
+    transition: all 325ms ease-in-out;
   }
 }
 </style>
