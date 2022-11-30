@@ -6,7 +6,7 @@
       class="pa-16 mb-6"
     >
       <v-row align="center">
-        <v-col cols="12" lg="4" offset-lg="2" class="">
+        <v-col cols="12" md="4" offset-md="2" class="">
           <v-img
             class="logo"
             contain
@@ -14,9 +14,9 @@
             :src="require('~/static/icon-144x144.png')"
           ></v-img
         ></v-col>
-        <v-col cols="12" sm="6" offset-sm="3" lg="4" offset-lg="0" class="">
+        <v-col cols="12" sm="6" offset-sm="3" md="4" offset-md="0" class="">
           <h1
-            class="site-title text-h2 font-weight-bold text-center text-lg-left"
+            class="site-title text-h2 text-md-h1 font-weight-bold text-center text-lg-left"
           >
             Friends of Rick and Morty
           </h1>
@@ -110,8 +110,18 @@
     </v-footer>
 
     <!-- Dialog with character details -->
-    <v-dialog v-if="character" v-model="dialog" max-width="900px">
-      <character-popup :character="character"></character-popup>
+    <v-dialog
+      v-if="character"
+      v-model="dialog"
+      :fullscreen="$vuetify.breakpoint.smAndDown"
+      :max-width="$vuetify.breakpoint.smAndDown ? '' : '900px'"
+      transition="dialog-bottom-transition"
+      scrollable
+    >
+      <character-popup
+        :character="character"
+        @close="closeDialog"
+      ></character-popup>
     </v-dialog>
   </article>
 </template>
@@ -133,7 +143,7 @@ export default {
     paging: {},
     dialog: false,
   }),
-  // set up computed properties to get the next and previous disabled state
+
   computed: {
     prevDisabled() {
       return !this.paging.prev
@@ -142,6 +152,7 @@ export default {
       return !this.paging.next
     },
   },
+
   methods: {
     async nextPage() {
       const { data } = await this.$axios.get(this.paging.next)
@@ -153,7 +164,6 @@ export default {
       this.characters = data.results
       this.paging = data.info
     },
-    // get character details
     async getCharacter(id) {
       const { data } = await this.$axios.get(
         `https://rickandmortyapi.com/api/character/${id}`
@@ -161,13 +171,14 @@ export default {
       this.character = data
       this.dialog = true
     },
+    closeDialog() {
+      this.dialog = false
+    },
   },
 }
 </script>
 
 <style lang="scss">
-@import '~vuetify/src/styles/settings/_variables';
-
 .site-title {
   -webkit-text-stroke: 2px #000;
   -webkit-text-fill-color: transparent;
