@@ -1,34 +1,6 @@
 <template>
   <article>
     <site-header></site-header>
-    <!-- <v-parallax
-      :src="require('~/static/rm-prism.jpg')"
-      height="500"
-      class="site-header pa-16 mb-6"
-    >
-      <v-row align="center">
-        <v-col
-          cols="12"
-          md="4"
-          offset-md="2"
-          class="site-header__logo-container"
-        >
-          <v-img
-            class="site-header__logo"
-            contain
-            :max-height="$vuetify.breakpoint.smAndDown ? 144 : 288"
-            :src="require('~/static/icon-144x144.png')"
-          ></v-img
-        ></v-col>
-        <v-col cols="12" sm="6" offset-sm="3" md="4" offset-md="0" class="">
-          <h1
-            class="site-header__title text-h2 funky-text text-md-h1 font-weight-bold text-center text-lg-left"
-          >
-            Friends of Rick and Morty
-          </h1>
-        </v-col>
-      </v-row>
-    </v-parallax> -->
 
     <v-container fluid class="character-list px-16">
       <v-row justify="center" align="center">
@@ -133,8 +105,7 @@
 </template>
 
 <script>
-// https://rickandmortyapi.com/api/character
-import gsap from 'gsap'
+import { setScene } from '~/shared/animations.js'
 
 export default {
   name: 'IndexPage',
@@ -161,90 +132,7 @@ export default {
   },
 
   mounted() {
-    const tl = gsap.timeline()
-
-    // this.splitText('.site-header__title')
-
-    // init site-header, character-card and footer by setting opacity to 0
-    tl.set('.site-header .v-parallax__image-container', { opacity: 0 })
-    tl.set('.site-header__logo-container', {
-      opacity: 0,
-      scale: 3,
-      rotate: -180,
-      transformOrigin: 'center center',
-    })
-    tl.set('.site-header__title', { opacity: 0, y: '100%' })
-
-    tl.set('.character-card', {
-      opacity: 0,
-      rotation: gsap.utils.wrap([-2, 2]),
-    })
-    tl.set('.character-paging', { opacity: 0, y: 100 })
-    tl.set('.character-paging .v-btn', { opacity: 0, y: '100%' })
-
-    // animate intro
-    tl.to('.site-header__logo-container', {
-      opacity: 1,
-      duration: 2,
-      ease: 'bounce.out',
-      scale: 1,
-      rotate: 0,
-    })
-
-    tl.to('.site-header__title', {
-      y: 0,
-      opacity: 1,
-      duration: 1.1,
-      ease: 'elastic.out(1, 0.3)',
-    })
-
-    tl.to(
-      '.site-header .v-parallax__image-container',
-      {
-        opacity: 1,
-        duration: 5,
-        ease: 'power2.out',
-      },
-      '-=1'
-    )
-
-    // animate character cards in staggered fashion and randomly rotate from -5deg to 5deg
-    tl.to(
-      '.character-card',
-      {
-        opacity: 1,
-        ease: 'power4.outIn',
-        rotation: 0,
-        stagger: {
-          from: 'edges',
-          grid: [1, 0],
-          amount: 0.5,
-          duration: 0.5,
-        },
-      },
-      '-=4'
-    )
-
-    tl.to(
-      '.character-paging',
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.2,
-        ease: 'power4.outIn',
-      },
-      '-=3'
-    )
-    tl.to(
-      '.character-paging .v-btn',
-      {
-        opacity: 1,
-        y: 0,
-        ease: 'power4.outIn',
-        stagger: 0.2,
-      },
-      '-=3'
-    )
+    setScene()
   },
 
   methods: {
