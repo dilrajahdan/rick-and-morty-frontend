@@ -11,6 +11,16 @@
       <v-icon>mdi-close</v-icon>
     </v-btn>
     <v-img light :src="character.image" height="500px" class="mb-6">
+      <template #placeholder>
+        <v-row class="fill-height ma-0" align="center" justify="center">
+          <v-img
+            class="loader"
+            contain
+            max-height="200"
+            :src="require('~/static/icon-144x144.png')"
+          ></v-img>
+        </v-row>
+      </template>
       <v-container class="fill-height pb-0">
         <v-row align="end" class="fill-height">
           <v-card-text class="text-h2 font-weight-bold deep-purple accent-1">{{
@@ -89,6 +99,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~/assets/utils.scss';
+
 .close-button {
   position: absolute;
   top: 1em;
