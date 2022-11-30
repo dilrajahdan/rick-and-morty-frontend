@@ -2,8 +2,16 @@
   <article>
     <site-header></site-header>
 
+    <!-- <v-text-field
+      v-model="search"
+      append-icon="mdi-magnify"
+      label="Search"
+      single-line
+      hide-details
+    ></v-text-field> -->
+
     <character-list
-      :characters="characters"
+      :characters="filteredCharacters"
       @selectedCharacter="getCharacter"
     ></character-list>
 
@@ -73,6 +81,7 @@ export default {
     characters: [],
     paging: {},
     dialog: false,
+    search: '',
   }),
 
   computed: {
@@ -81,6 +90,12 @@ export default {
     },
     nextDisabled() {
       return !this.paging.next
+    },
+
+    filteredCharacters() {
+      return this.characters.filter((character) => {
+        return character.name.toLowerCase().includes(this.search.toLowerCase())
+      })
     },
   },
 
