@@ -1,13 +1,22 @@
 <template>
-  <!-- <v-dialog  v-model="character" max-width="900px"> -->
   <v-card>
-    <v-card-title class="headline">{{ character.name }}</v-card-title>
+    <v-img
+      :src="character.image"
+      height="500px"
+      gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
+    >
+      <v-container class="fill-height">
+        <v-row align="end" class="fill-height">
+          <v-card-text class="text-h1 font-weight-bold">{{
+            character.name
+          }}</v-card-text>
+        </v-row>
+      </v-container>
+    </v-img>
 
     <v-card-text>
       <v-row>
-        <v-col cols="12" sm="6" md="4">
-          <v-img :src="character.image" height="200px"></v-img>
-        </v-col>
+        <v-col cols="12" sm="6" md="4"> </v-col>
         <v-col cols="12" sm="6" md="8">
           <p><strong>Name:</strong> {{ character.name }}</p>
           <p><strong>Species:</strong> {{ character.species }}</p>
@@ -21,7 +30,6 @@
       </v-row>
     </v-card-text>
   </v-card>
-  <!-- </v-dialog> -->
 </template>
 
 <script>

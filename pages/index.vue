@@ -6,12 +6,7 @@
       class="pa-16 mb-6"
     >
       <v-row align="center">
-        <v-col cols="12" sm="6" offset-sm="3" lg="4" offset-lg="2">
-          <h1 class="text-h2 font-weight-bold text-center">
-            Rick and Morty Character Finder
-          </h1>
-        </v-col>
-        <v-col cols="12" lg="4">
+        <v-col cols="12" lg="4" offset-lg="2" class="">
           <v-img
             class="logo"
             contain
@@ -19,6 +14,13 @@
             :src="require('~/static/icon-144x144.png')"
           ></v-img
         ></v-col>
+        <v-col cols="12" sm="6" offset-sm="3" lg="4" offset-lg="0" class="">
+          <h1
+            class="site-title text-h2 font-weight-bold text-center text-lg-left"
+          >
+            Friends of Rick and Morty
+          </h1>
+        </v-col>
       </v-row>
     </v-parallax>
 
@@ -40,7 +42,18 @@
             light
             @click="getCharacter(character.id)"
           >
-            <v-img height="300" lazy :src="character.image"></v-img>
+            <v-img height="300" lazy :src="character.image">
+              <template #placeholder>
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-img
+                    class="loader"
+                    contain
+                    max-height="200"
+                    :src="require('~/static/icon-144x144.png')"
+                  ></v-img>
+                </v-row>
+              </template>
+            </v-img>
             <v-card-title :title="character.name" class="text-h5"
               ><span class="text-no-wrap text-truncate">{{
                 character.name
@@ -153,9 +166,25 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~vuetify/src/styles/settings/_variables';
+
+.site-title {
+  -webkit-text-stroke: 2px #000;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(45deg, #ffffff 10%, #ffff00 100%);
+  text-shadow: #ff0000 4px 4px 0px;
+}
+
 .logo {
+  animation: rotate 150s linear infinite;
+  filter: invert(1);
+}
+
+.loader {
   animation: rotate 10s linear infinite;
   filter: invert(1);
+  opacity: 0.2;
 }
 
 // rotate animation
