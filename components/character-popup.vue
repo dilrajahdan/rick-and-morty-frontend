@@ -5,6 +5,7 @@
       x-large
       icon
       color="pink accent-3"
+      outlined
       @click="close"
     >
       <v-icon>mdi-close</v-icon>

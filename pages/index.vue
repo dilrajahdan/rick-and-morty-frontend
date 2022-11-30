@@ -111,7 +111,7 @@
 
     <!-- Dialog with character details -->
     <v-dialog
-      v-if="character"
+      v-if="characterDetail"
       v-model="dialog"
       :fullscreen="$vuetify.breakpoint.smAndDown"
       :max-width="$vuetify.breakpoint.smAndDown ? '' : '900px'"
@@ -119,7 +119,7 @@
       scrollable
     >
       <character-popup
-        :character="character"
+        :character="characterDetail"
         @close="closeDialog"
       ></character-popup>
     </v-dialog>
@@ -138,7 +138,7 @@ export default {
     return { characters: data.results, paging: data.info }
   },
   data: () => ({
-    character: null,
+    characterDetail: null,
     characters: [],
     paging: {},
     dialog: false,
@@ -168,7 +168,7 @@ export default {
       const { data } = await this.$axios.get(
         `https://rickandmortyapi.com/api/character/${id}`
       )
-      this.character = data
+      this.characterDetail = data
       this.dialog = true
     },
     closeDialog() {
