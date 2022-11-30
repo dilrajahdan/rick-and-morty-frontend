@@ -1,6 +1,7 @@
 <template>
   <article>
-    <v-parallax
+    <site-header></site-header>
+    <!-- <v-parallax
       :src="require('~/static/rm-prism.jpg')"
       height="500"
       class="site-header pa-16 mb-6"
@@ -27,7 +28,7 @@
           </h1>
         </v-col>
       </v-row>
-    </v-parallax>
+    </v-parallax> -->
 
     <v-container fluid class="character-list px-16">
       <v-row justify="center" align="center">
@@ -119,7 +120,7 @@
       v-if="characterDetail"
       v-model="dialog"
       :fullscreen="$vuetify.breakpoint.smAndDown"
-      :max-width="$vuetify.breakpoint.smAndDown ? '' : '800px'"
+      :max-width="$vuetify.breakpoint.smAndDown ? '' : '600px'"
       scrollable
       hide-overlay
     >
@@ -282,11 +283,10 @@ export default {
 .v-application .character-card {
   &:hover {
     transition: all 155ms ease-in-out;
-    transform: rotate(0) !important;
 
     .v-image__image {
       transition: all 555ms ease-in-out;
-      transform: scale(1.1);
+      background-size: 120%;
     }
   }
 
@@ -300,7 +300,7 @@ export default {
   }
 
   .v-image__image {
-    transform: scale(1);
+    background-size: 110%;
     transition: all 325ms ease-in-out;
   }
 }

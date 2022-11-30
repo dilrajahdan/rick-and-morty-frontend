@@ -10,10 +10,11 @@
     >
       <v-icon>mdi-close</v-icon>
     </v-btn>
+
     <v-img
       light
       :src="character.image"
-      :height="$vuetify.breakpoint.smAndDown ? 300 : 600"
+      :height="$vuetify.breakpoint.smAndDown ? 300 : 400"
       class="mb-6"
       position="50% 30%"
       contain
