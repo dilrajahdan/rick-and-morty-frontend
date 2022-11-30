@@ -15,7 +15,7 @@
           <v-img
             class="site-header__logo"
             contain
-            max-height="200"
+            max-height="288"
             :src="require('~/static/icon-144x144.png')"
           ></v-img
         ></v-col>
@@ -49,7 +49,18 @@
             :data-id="character.id"
             @click="getCharacter(character.id)"
           >
-            <v-img height="300" lazy :src="character.image"> </v-img>
+            <v-img height="300" lazy :src="character.image">
+              <template #placeholder>
+                <v-row class="fill-height" align="center" justify="center">
+                  <img
+                    height="144"
+                    width="144"
+                    class="character-card__loader"
+                    :src="require('~/static/icon-144x144.png')"
+                  />
+                </v-row>
+              </template>
+            </v-img>
             <v-card-title :title="character.name" class="text-h5"
               ><span class="text-no-wrap text-truncate funky-text--alt">{{
                 character.name
@@ -110,9 +121,9 @@
       v-if="characterDetail"
       v-model="dialog"
       :fullscreen="$vuetify.breakpoint.smAndDown"
-      :max-width="$vuetify.breakpoint.smAndDown ? '' : '900px'"
-      transition="dialog-bottom-transition"
+      :max-width="$vuetify.breakpoint.smAndDown ? '' : '800px'"
       scrollable
+      hide-overlay
     >
       <character-popup
         :character="characterDetail"
@@ -202,7 +213,7 @@ export default {
       '.character-card',
       {
         opacity: 1,
-        ease: 'ease.outIn',
+        ease: 'power4.outIn',
         rotation: 0,
         stagger: {
           from: 'edges',
@@ -285,5 +296,31 @@ export default {
 .site-header__logo {
   animation: rotate 150s linear infinite;
   filter: invert(1);
+}
+
+.v-application .character-card {
+  &:hover {
+    transition: all 155ms ease-in-out;
+    transform: rotate(0) !important;
+
+    .v-image__image {
+      transition: background-size 255ms ease-in-out;
+      background-size: 110%;
+    }
+  }
+
+  .character-card__loader {
+    animation: rotate 10s linear infinite;
+    filter: invert(1);
+
+    .v-image__image {
+      background-size: auto;
+    }
+  }
+
+  .v-image__image {
+    background-size: 120%;
+    transition: background-size 125ms ease-in-out;
+  }
 }
 </style>
