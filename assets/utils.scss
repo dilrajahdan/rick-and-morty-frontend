@@ -13,3 +13,20 @@
       transform: rotate(360deg);
     }
   }
+
+
+  .funky-text { 
+    -webkit-text-stroke: 2px #000;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(45deg, #ffffff 10%, #ffff00 100%);
+    text-shadow: #ff0000 4px 4px 0px;
+  }
+
+  .funky-text--alt { 
+    -webkit-text-stroke: 2px #000;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(45deg, #dedede 10%, #000000 100%);
+    // text-shadow: #000000 4px 4px 0px;
+  }

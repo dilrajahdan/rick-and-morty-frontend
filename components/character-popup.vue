@@ -23,9 +23,9 @@
       </template>
       <v-container class="fill-height pb-0">
         <v-row align="end" class="fill-height">
-          <v-card-text class="text-h2 font-weight-bold deep-purple accent-1">{{
-            character.name
-          }}</v-card-text>
+          <v-card-text class="text-h2 font-weight-bold deep-purple accent-2">
+            <span class="funky-text">{{ character.name }}</span>
+          </v-card-text>
         </v-row>
       </v-container>
     </v-img>
@@ -33,7 +33,6 @@
     <v-card-text>
       <v-row>
         <v-col cols="12" sm="6">
-          <p class="text-h5"><strong>Name:</strong> {{ character.name }}</p>
           <p class="text-h5">
             <strong>Species:</strong> {{ character.species }}
           </p>
