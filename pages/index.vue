@@ -165,7 +165,10 @@ export default {
     })
     tl.set('.site-header__title', { opacity: 0, y: '100%' })
 
-    tl.set('.character-card', { opacity: 0 })
+    tl.set('.character-card', {
+      opacity: 0,
+      rotation: gsap.utils.wrap([-2, 2]),
+    })
     tl.set('.character-paging', { opacity: 0, y: '100%' })
     tl.set('.character-paging .v-btn', { opacity: 0, y: '100%' })
 
@@ -200,7 +203,7 @@ export default {
       {
         opacity: 1,
         ease: 'ease.outIn',
-        rotation: gsap.utils.wrap([-2, 2]),
+        rotation: 0,
         stagger: {
           from: 'edges',
           grid: [1, 0],
