@@ -59,10 +59,14 @@ import { setScene } from '~/shared/animations.js'
 export default {
   name: 'IndexPage',
   async asyncData({ $axios }) {
-    const { data } = await $axios.get(
-      'https://rickandmortyapi.com/api/character'
-    )
-    return { characters: data.results, paging: data.info }
+    try {
+      const { data } = await $axios.get(
+        'https://rickandmortyapi.com/api/character'
+      )
+      return { characters: data.results, paging: data.info }
+    } catch (error) {
+      console.warn('error with https://rickandmortyapi.com/', error)
+    }
   },
   data: () => ({
     characterDetail: null,
