@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="character-list px-16">
+  <v-container fluid class="character-list px-4">
     <v-row justify="center" align="center">
       <v-col
         v-for="character in characters"
