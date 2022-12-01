@@ -9,8 +9,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - rickandmorty',
-    title: 'rickandmorty',
+    titleTemplate: '%s - Friends of Rick and Morty',
+    title: 'Fun with the Rick and Morty API',
     htmlAttrs: {
       lang: 'en',
     },
