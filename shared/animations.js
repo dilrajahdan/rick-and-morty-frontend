@@ -20,7 +20,7 @@ export const setScene = () => {
   tl.set('.character-paging', { opacity: 0, y: 100 })
   tl.set('.character-paging .v-btn', { opacity: 0, y: '100%' })
 
-  return tl
+  // return tl
 }
 
 // Intro scene
@@ -57,10 +57,12 @@ export const introScene = () => {
     {
       opacity: 1,
       ease: 'power4.outIn',
-      rotation: 0,
+      // rotation: 0,
+      rotation: gsap.utils.wrap([-7, 7]),
+
       stagger: {
         from: 'edges',
-        grid: [1, 0],
+        grid: 'auto',
         amount: 0.5,
         duration: 0.5,
       },
@@ -89,5 +91,5 @@ export const introScene = () => {
     '-=3'
   )
 
-  return tl
+  // return tl
 }

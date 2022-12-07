@@ -9,11 +9,23 @@
       single-line
       hide-details
     ></v-text-field> -->
-
+    <!-- <transition-group
+      @before-enter="onBeforeEnter"
+      @enter="onEnter"
+      @after-enter="onAfterEnter"
+      @enter-cancelled="onEnterCancelled"
+      @before-leave="onBeforeLeave"
+      @leave="onLeave"
+      @after-leave="onAfterLeave"
+      @leave-cancelled="onLeaveCancelled"
+    > -->
     <character-list
+      v-show="characters.length"
+      key="characters"
       :characters="filteredCharacters"
       @selectedCharacter="getCharacter"
     ></character-list>
+    <!-- </transition-group> -->
 
     <v-footer class="character-paging" fixed app>
       <v-container>
@@ -131,6 +143,87 @@ export default {
     closeDialog() {
       this.dialog = false
     },
+    // ============
+
+    // import gsap from 'gsap'
+    // called before the element is inserted into the DOM.
+    // use this to set the "enter-from" state of the element
+    // onBeforeEnter(el) {
+    //   // const card = el.querySelector('.character-card')
+
+    //   // console.log('onBeforeEnter', card)
+
+    //   const tl = gsap.timeline()
+    //   tl.restart(true)
+
+    //   tl.set(el, {
+    //     opacity: 0,
+    //     rotate: 0,
+    //   })
+    // },
+
+    // // called one frame after the element is inserted.
+    // // use this to start the animation.
+    // onEnter(el, done) {
+    //   // call the done callback to indicate transition end
+    //   // optional if used in combination with CSS
+    //   const card = el.querySelector('.character-card')
+    //   console.log('onEnter', card)
+    //   // console.log('onEnter', el.getElementByClass('character-card'))
+
+    //   const tl = gsap.timeline()
+    //   // tl.clear().pause(0)
+
+    //   tl.to(el, {
+    //     opacity: 1,
+
+    //     ease: 'power4.out',
+    //     stagger: 1,
+    //     rotate: gsap.utils.random(-5, 5),
+    //     onComplete: done(),
+    //   })
+
+    //   // done()
+    // },
+
+    // // called when the enter transition has finished.
+    // onAfterEnter(el) {},
+    // onEnterCancelled(el) {},
+
+    // // called before the leave hook.
+    // // Most of the time, you should just use the leave hook.
+    // onBeforeLeave(el) {},
+
+    // // called when the leave transition starts.
+    // // use this to start the leaving animation.
+    // onLeave(el, done) {
+    //   // call the done callback to indicate transition end
+    //   // optional if used in combination with CSS
+    //   console.log('onLeave', el)
+    //   // const card = el.querySelector('.character-card')
+
+    //   const tl = gsap.timeline()
+
+    //   tl.to(el, {
+    //     scale: 0,
+    //     opacity: 0,
+    //     y: 0,
+    //     duration: 0.5,
+    //     ease: 'power4.out',
+    //     stagger: 1,
+    //     rotate: gsap.utils.random(-5, 5),
+    //     onComplete: done(),
+    //   })
+
+    //   // done()
+    // },
+
+    // // called when the leave transition has finished and the
+    // // element has been removed from the DOM.
+    // onAfterLeave(el) {},
+
+    // // only available with v-show transitions
+    // onLeaveCancelled(el) {},
   },
 }
 </script>
