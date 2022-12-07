@@ -74,7 +74,7 @@
 
 <script>
 // import gsap from 'gsap'
-import { setScene } from '~/shared/animations.js'
+import { introScene } from '~/shared/animations.js'
 
 export default {
   name: 'IndexPage',
@@ -112,7 +112,7 @@ export default {
   },
 
   mounted() {
-    setScene()
+    introScene()
   },
 
   methods: {

@@ -1,8 +1,20 @@
 import { gsap } from 'gsap'
 
+// const tl = gsap.timeline()
+
+export const introScene = () => {
+  const tl = gsap.timeline()
+
+  tl.add(setScene())
+  tl.add(introHeader(), '>')
+  tl.add(introCards(), '>-4')
+  tl.add(introPaging(), '>-3')
+}
+
 // Set scene
-export const setScene = () => {
-  const tl = gsap.timeline({ onComplete: introScene() })
+export function setScene() {
+  // const tl = gsap.timeline({ onComplete: introScene() })
+  const tl = gsap.timeline()
 
   tl.set('.site-header .v-parallax__image-container', { opacity: 0 })
   tl.set('.site-header__logo-container', {
@@ -15,7 +27,7 @@ export const setScene = () => {
 
   tl.set('.character-card', {
     opacity: 0,
-    rotation: gsap.utils.wrap([-2, 2]),
+    rotation: gsap.utils.wrap([-4, 4]),
   })
   tl.set('.character-paging', { opacity: 0, y: 100 })
   tl.set('.character-paging .v-btn', { opacity: 0, y: '100%' })
@@ -23,8 +35,7 @@ export const setScene = () => {
   // return tl
 }
 
-// Intro scene
-export const introScene = () => {
+export function introHeader() {
   const tl = gsap.timeline()
 
   tl.to('.site-header__logo-container', {
@@ -51,6 +62,11 @@ export const introScene = () => {
     },
     '-=1'
   )
+  return tl
+}
+
+export function introCards() {
+  const tl = gsap.timeline()
 
   tl.to(
     '.character-card',
@@ -58,7 +74,7 @@ export const introScene = () => {
       opacity: 1,
       ease: 'power4.outIn',
       // rotation: 0,
-      rotation: gsap.utils.wrap([-7, 7]),
+      // rotation: gsap.utils.wrap([-4, 4]),
 
       stagger: {
         from: 'edges',
@@ -69,6 +85,11 @@ export const introScene = () => {
     },
     '-=4'
   )
+  return tl
+}
+
+export function introPaging() {
+  const tl = gsap.timeline()
 
   tl.to(
     '.character-paging',
@@ -91,5 +112,5 @@ export const introScene = () => {
     '-=3'
   )
 
-  // return tl
+  return tl
 }

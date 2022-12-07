@@ -107,8 +107,8 @@ export default {
 
       // ***
       // const q = gsap.utils.selector(this.$el);
-      const cards = gsap.utils.toArray('.character-card')
-      console.log('cards', cards)
+      // const cards = gsap.utils.toArray('.character-card')
+      // console.log('cards', cards)
 
       this.tl.set(el, {
         opacity: 0,
@@ -118,7 +118,7 @@ export default {
       this.tl.to(el, {
         opacity: 1,
         scale: 1,
-        rotate: gsap.utils.random(-7, 7),
+        rotate: gsap.utils.random(-4, 4),
         ease: 'power4.in',
         stagger: 0.2,
         onComplete: done(),
@@ -140,7 +140,7 @@ export default {
     onLeave(el, done) {
       // call the done callback to indicate transition end
       // optional if used in combination with CSS
-      console.log('onLeave', el)
+      // console.log('onLeave', el)
       // const card = el.querySelector('.character-card')
 
       this.tl = gsap.timeline()
