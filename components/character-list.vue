@@ -112,15 +112,15 @@ export default {
 
       this.tl.set(el, {
         opacity: 0,
-        // rotate: 0,
+        rotate: 0,
       })
 
       this.tl.to(el, {
         opacity: 1,
-        scale: 1,
+        // scale: 1,
         rotate: gsap.utils.random(-4, 4),
-        ease: 'power4.in',
-        stagger: 0.2,
+        ease: 'power4.out',
+        duration: 0.2,
         onComplete: done(),
       })
 
@@ -148,14 +148,13 @@ export default {
       this.tl.to(el, {
         // scale: 0.5,
         opacity: 0,
-        // rotate: gsap.utils.random(-3, 3),
-        duration: 0.1,
+        rotate: 17,
+        duration: 0.2,
         ease: 'power4.out',
         // stagger: 0.1,
 
         onComplete() {
           // console.log('onLeave DONE', this)
-
           done()
         },
       })
@@ -165,7 +164,9 @@ export default {
 
     // called when the leave transition has finished and the
     // element has been removed from the DOM.
-    onAfterLeave(el) {},
+    onAfterLeave(el) {
+      // console.log('onAfterLeave - Elemnt removed ', this)
+    },
 
     // only available with v-show transitions
     onLeaveCancelled(el) {},
